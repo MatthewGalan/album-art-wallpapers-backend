@@ -6,5 +6,9 @@
   },
   "scripts": {
     "start": "node app.js"
+  },
+  "prettier": {},
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
