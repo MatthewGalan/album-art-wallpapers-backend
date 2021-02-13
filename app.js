@@ -25,14 +25,19 @@ request.post(authOptions, function (error, response, body) {
   if (!error && response.statusCode === 200) {
     var token = body.access_token;
     var options = {
-      url: "https://api.spotify.com/v1/search?q=fetch&type=track%2Calbum",
+      url: "https://api.spotify.com/v1/search?q=fetch&type=album&limit=5",
       headers: {
         Authorization: "Bearer " + token,
       },
       json: true,
     };
     request.get(options, function (error, response, body) {
-      console.log(body.tracks.items[0]);
+      const result = body.albums.items.map((i) => ({
+        artists: i.artists.map((a) => a.name),
+        name: i.name,
+        image: i.images[0].url,
+      }));
+      console.log(result);
     });
   }
 });
